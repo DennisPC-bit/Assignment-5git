@@ -1,5 +1,6 @@
 package exercises.DPC.Gui;
 
+import exercises.DPC.Data.Person;
 import exercises.DPC.Data.Teacher;
 
 public class TeacherMenu extends Menu {
@@ -26,6 +27,9 @@ public class TeacherMenu extends Menu {
             case (1) -> {
                 System.out.print("Write Teacher number: ");
                 int number = getOption();
+                for(Person person : pm.people)
+                    if(person.getId()==number)
+                        number=pm.uniqueNumber(500);
                 System.out.print("Write Teacher name: ");
                 String name = getInput();
                 System.out.print( "Write Teacher email: ");

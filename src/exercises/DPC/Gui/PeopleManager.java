@@ -19,7 +19,7 @@ public class PeopleManager {
 
         addPersonToList(102,"Ib Boesen","ibo@easv.dk");
 
-        addTeacherToList(202,"Bent H. Pedersen","bhp@easv.dk","bhp","Programming");
+        addTeacherToList(502,"Bent H. Pedersen","bhp@easv.dk","bhp","Programming");
 
         addStudentsToList(105,"Bo Ibsen", "bib@easv.dk","CS",8.5);
     }
@@ -32,6 +32,13 @@ public void addPersonToList(int id, String name, String email){
     people.add(new Student(id,name,email));
 }
 
+    public int uniqueNumber(int i) {
+        for (Person person : people){
+            if(i== person.getId())
+                i++;
+        }
+        return i;
+    }
     /**
      * Adds a Teacher to the teacher list
      * @param id
@@ -86,7 +93,7 @@ public void addPersonToList(int id, String name, String email){
     for(Teacher person : teachersList)
         try{
             if(Integer.parseInt(input)== person.getId()){
-                person.toString(person);
+                return person.toString(person);
             }
         }
         catch (NumberFormatException exception){

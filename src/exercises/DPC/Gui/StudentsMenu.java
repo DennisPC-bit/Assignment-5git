@@ -1,5 +1,6 @@
 package exercises.DPC.Gui;
 
+import exercises.DPC.Data.Person;
 import exercises.DPC.Data.Student;
 
 public class StudentsMenu extends Menu {
@@ -15,6 +16,7 @@ PeopleManager pm = new PeopleManager();
         super("Students menu", "Create Student", "Read student by ID", "Print all Students", "Edit Student", "Edit GradeAVG", "Add grade", "Edit Education", "Delete");
     }
 
+
     /**
      * Does whatever you choose
      * @param option the menu option that has been selected.
@@ -25,6 +27,9 @@ PeopleManager pm = new PeopleManager();
             case (1) -> {
                 System.out.print("Write Student number: ");
                 int number = getOption();
+                for(Person person : pm.people)
+                    if(person.getId()==number)
+                        number=pm.uniqueNumber(100);
                 System.out.print("Write Student name: ");
                 String name = getInput();
                 System.out.print("Write Student email: ");
