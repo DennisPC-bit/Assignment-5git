@@ -9,27 +9,41 @@ import java.util.Comparator;
 import java.util.List;
 
 public class PeopleManager {
+    static int i=1;
     /**
      * Adds some data to the lists
      */
     public PeopleManager(){
-        addPersonToList(100,"Hans Nielsen"," hni@easv.dk");
 
-        addPersonToList(101,"Niels Hansen", "nha@easv.dk");
-
-        addPersonToList(102,"Ib Boesen","ibo@easv.dk");
-
-        addTeacherToList(502,"Bent H. Pedersen","bhp@easv.dk","bhp","Programming");
-
-        addStudentsToList(105,"Bo Ibsen", "bib@easv.dk","CS",8.5);
+        if(i==1)
+        addInitialPeople();
+        i++;
     }
 
-List<Person> people = new ArrayList<>();
-List<Teacher> teachersList = new ArrayList<>();
-List<Student> studentList = new ArrayList<>();
+static List<Person> people = new ArrayList<>();
+static List<Teacher> teachersList = new ArrayList<>();
+static List<Student> studentList = new ArrayList<>();
+
+public void addInitialPeople(){
+    addPersonToList(100,"Hans Nielsen"," hni@easv.dk");
+
+    addPersonToList(101,"Niels Hansen", "nha@easv.dk");
+
+    addPersonToList(102,"Ib Boesen","ibo@easv.dk");
+
+    addTeacherToList(502,"Bent H. Pedersen","bhp@easv.dk","bhp","Programming");
+
+    addStudentsToList(105,"Bo Ibsen", "bib@easv.dk","CS",8.5);
+}
 
 public void addPersonToList(int id, String name, String email){
-    people.add(new Student(id,name,email));
+    for (Person person: people){
+        if(person.getId()==id) {
+            person.setName(name);
+            person.setEmail(email);
+        }
+    }
+    people.add(new Person(id,name,email));
 }
 
     public int uniqueNumber(int i) {
@@ -48,8 +62,8 @@ public void addPersonToList(int id, String name, String email){
      * @param main
      */
     public void addTeacherToList(int id, String name, String email, String initials, String main){
-    teachersList.add(new Teacher(id,name,email,initials,main));
-    people.add(new Teacher(id,name,email));
+        teachersList.add(new Teacher(id,name,email,initials,main));
+        people.add(new Teacher(id,name,email));
 }
 
     /**
@@ -62,7 +76,7 @@ public void addPersonToList(int id, String name, String email){
      */
     public void addStudentsToList(int id, String name, String email, String education, double gradeAVG){
     studentList.add(new Student(id,name,email,education,gradeAVG));
-    people.add(new Student(id,name,email));
+        people.add(new Student(id,name,email));
 }
 
     /**
@@ -131,7 +145,8 @@ public void addPersonToList(int id, String name, String email){
      * Prints info in arrays
      */
     public void printPeoplesInfo() {
-    System.out.printf("%n%4s%20s%20s%n","####","Name","Email");
+        System.out.println("People:");
+    System.out.printf("%4s%20s%20s%n","####","Name","Email");
     people.sort(Comparator.comparingInt(Person::getId));
     for (Person person : people) {
         System.out.printf("%4d", person.getId());
@@ -142,16 +157,18 @@ public void addPersonToList(int id, String name, String email){
     }
 
     public void printTeachersInfo(){
+        System.out.println("Teachers:");
     teachersList.sort(Comparator.comparingInt(Person::getId));
-        System.out.printf("%n%4s%20s%20s%10s%1s%-15s", "####", "Name", "Email", "Initials","", "Main");
+        System.out.printf("%4s%20s%20s%10s%1s%-15s", "####", "Name", "Email", "Initials","", "Main");
     for(Teacher teacher: teachersList)
         System.out.printf("%n%4d%20s%20s%10s%1s%-15s", teacher.getId(), teacher.getName(), teacher.getEmail(), teacher.getInitials(),"", teacher.getSubjects());
         System.out.printf("%n");
 }
 
     public void printStudentsInfo(){
+        System.out.println("Students:");
     studentList.sort(Comparator.comparingInt(Person::getId));
-        System.out.printf("%n%4s%20s%20s%10s%15s", "####", "Name", "Email", "Education", "GradeAVG");
+        System.out.printf("%4s%20s%20s%10s%15s", "####", "Name", "Email", "Education", "GradeAVG");
         for(Student student: studentList)
             System.out.printf("%n%4d%20s%20s%10s%15s", student.getId(), student.getName(), student.getEmail(), student.getEducation(), student.getGradeAVG());
         System.out.printf("%n");

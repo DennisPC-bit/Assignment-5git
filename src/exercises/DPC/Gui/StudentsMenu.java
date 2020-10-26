@@ -112,8 +112,7 @@ PeopleManager pm = new PeopleManager();
                 System.out.println(pm.removePerson(getInput()));
                 showMenu();
             }
-            default ->{ clear();
-            System.out.printf("%n%s%n%s%n%s%n%s%n%s%n","Main menu","1: Students Menu", "2: Teachers Menu", "3: Print all Assets","0: Exit");}
+            case(0)->{clear();
+                System.out.printf("%n%s%n%s%n%s%n%s%n%s%n","Main menu","1: Students Menu", "2: Teachers Menu", "3: Print all Assets","0: Exit");}}
         }
     }
-}

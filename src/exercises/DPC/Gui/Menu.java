@@ -130,4 +130,3 @@ public abstract class Menu
         System.out.printf("%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n");
     }
 }
-

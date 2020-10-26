@@ -1,6 +1,6 @@
 package exercises.DPC.Data;
 
-public abstract class Person {
+public class Person {
     private final int id;
     private String name;
     private String email;
