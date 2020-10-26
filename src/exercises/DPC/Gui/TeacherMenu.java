@@ -40,7 +40,8 @@ public class TeacherMenu extends Menu {
                 String main = getInput();
                 pm.addTeacherToList(number, name, email, main, initials);
                 System.out.println("The person has been added: " + number + " " + name + " " + email + " " + main + " " + initials);
-                run();
+                pause();
+                showMenu();
             }
             case (2) -> {
                 System.out.println("Write persons name or number");
@@ -49,6 +50,7 @@ public class TeacherMenu extends Menu {
             }
             case (3) -> {
                 pm.printTeachersInfo();
+                pause();
                 showMenu();
             }
             case (4) -> {
@@ -88,8 +90,8 @@ public class TeacherMenu extends Menu {
                 showMenu();
             }
             case (0) -> { clear();
-                System.out.printf("%n%s%n%s%n%s%n%s%n%s%n","Main menu","1: Students Menu", "2: Teachers Menu", "3: Print all Assets","0: Exit");}
-            default -> System.out.println("something went wrong");
+                System.out.printf("%n%s%n%-30s%-30s%n%-30s%-30s%n","Main menu","1: Students Menu", "2: Teachers Menu", "3: Print all Assets","0: Exit");}
+            default -> System.out.println("Invalid input.");
             }
         }
     }

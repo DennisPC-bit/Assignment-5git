@@ -1,5 +1,8 @@
 package exercises.DPC.Gui;
 
+import java.io.Console;
+import java.io.IOException;
+import java.io.StreamCorruptedException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -115,6 +118,13 @@ public abstract class Menu
      * Waits until the 'enter' key is pressed.
      */
     protected void pause() {
+        System.out.println("Press \"ENTER\" to continue...");
+        try {
+            System.in.read();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public String getInput() {

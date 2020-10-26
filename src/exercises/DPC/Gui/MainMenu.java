@@ -7,7 +7,6 @@ public class MainMenu extends Menu {
     public MainMenu() {
         super("Main menu", "Students Menu", "Teachers Menu", "Print all Assets");
     }
-
     /**
      * Does whatever you choose
      * @param option the menu option that has been selected.
@@ -19,8 +18,11 @@ public class MainMenu extends Menu {
             case (2) -> tm.run();
             case (3) -> {
                 pm.printPeoplesInfo();
+                pause();
                 showMenu();
             }
+            default -> {System.out.println("Invalid input.");
+            showMenu();}
         }
     }
 }

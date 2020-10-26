@@ -40,6 +40,7 @@ PeopleManager pm = new PeopleManager();
                 String main = getInput();
                 pm.addStudentsToList(number, name, email, main, grade);
                 System.out.println("The person has been added: " + number + " " + name + " " + email + " " + grade + " " + main);
+                pause();
                 showMenu();
             }
             case (2) -> {
@@ -49,6 +50,7 @@ PeopleManager pm = new PeopleManager();
             }
             case (3) -> {
                 pm.printStudentsInfo();
+                pause();
                 showMenu();
             }
             case (4) -> {
@@ -113,6 +115,7 @@ PeopleManager pm = new PeopleManager();
                 showMenu();
             }
             case(0)->{clear();
-                System.out.printf("%n%s%n%s%n%s%n%s%n%s%n","Main menu","1: Students Menu", "2: Teachers Menu", "3: Print all Assets","0: Exit");}}
+                System.out.printf("%n%s%n%-30s%-30s%n%-30s%-30s%n","Main menu","1: Students Menu", "2: Teachers Menu", "3: Print all Assets","0: Exit");}
+            default -> System.out.println("Invalid input.");}
         }
     }
