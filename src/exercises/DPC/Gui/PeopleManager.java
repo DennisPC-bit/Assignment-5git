@@ -13,12 +13,7 @@ public class PeopleManager {
     /**
      * Adds some data to the lists
      */
-    public PeopleManager(){
-
-        if(i==1)
-        addInitialPeople();
-        i++;
-    }
+    public PeopleManager(){}
 
 static List<Person> people = new ArrayList<>();
 static List<Teacher> teachersList = new ArrayList<>();
@@ -159,7 +154,7 @@ public void addPersonToList(int id, String name, String email){
     public void printTeachersInfo(){
         System.out.println("Teachers:");
     teachersList.sort(Comparator.comparingInt(Person::getId));
-        System.out.printf("%4s%20s%20s%10s%1s%-15s", "####", "Name", "Email", "Initials","", "Main");
+        System.out.printf("%4s%20s%20s%10s%1s%-15s", "####", "Name", "Email", "Initials","", "Subjects");
     for(Teacher teacher: teachersList)
         System.out.printf("%n%4d%20s%20s%10s%1s%-15s", teacher.getId(), teacher.getName(), teacher.getEmail(), teacher.getInitials(),"", teacher.getSubjects());
         System.out.printf("%n");

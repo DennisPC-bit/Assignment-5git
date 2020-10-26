@@ -3,6 +3,9 @@ package exercises.DPC.Gui;
 import exercises.DPC.Data.Person;
 import exercises.DPC.Data.Student;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class StudentsMenu extends Menu {
 PeopleManager pm = new PeopleManager();
     /**
@@ -24,98 +27,104 @@ PeopleManager pm = new PeopleManager();
     @Override
     protected void doAction(int option) {
         switch (option) {
-            case (1) -> {
-                System.out.print("Write Student number: ");
-                int number = getOption();
-                for(Person person : pm.people)
-                    if(person.getId()==number)
-                        number=pm.uniqueNumber(100);
-                System.out.print("Write Student name: ");
-                String name = getInput();
-                System.out.print("Write Student email: ");
-                String email = getInput();
-                System.out.print("Write grade: ");
-                double grade = getOption();
-                System.out.print("Write Main Subjects: ");
-                String main = getInput();
-                pm.addStudentsToList(number, name, email, main, grade);
-                System.out.println("The person has been added: " + number + " " + name + " " + email + " " + grade + " " + main);
-                pause();
-                showMenu();
-            }
-            case (2) -> {
-                System.out.println("Write persons name or number");
-                System.out.println(pm.getPersonsInfo(getInput()));
-                showMenu();
-            }
-            case (3) -> {
-                pm.printStudentsInfo();
-                pause();
-                showMenu();
-            }
-            case (4) -> {
-                System.out.print("Write the Students number: ");
-                for (Student student : pm.studentList){
-                    int number=getOption();
-                    if(number==student.getId()){
-                        System.out.print("write name or email to change it: ");
-                        switch (getInput().toLowerCase()){
-                            case ("name") -> {
-                                System.out.print("Write the name you want to change it to: ");
-                                student.setName(getInput());
-                                showMenu();
-                            }
-                            case("email") -> {
-                                System.out.print("Write the email you want to change it to: ");
-                                student.setEmail(getInput());
-                                showMenu();
-                            }
-                        }
-                    }
-                }
-            }
-            case (5) -> {
-                System.out.print("Write studentID: ");
-                for (Student student : pm.studentList) {
-                    if (student.getId() == getOption()) {
-                        System.out.print("Write grade: ");
-                        student.setGradeAVG(getOption());
-                        System.out.println(student.getName() + "'s grade has been changed.");
-                        showMenu();
-                    }
-                }
-            }
-            case (6) -> {
-                System.out.print("Write the students number: ");
-                for (Student student : pm.studentList){
-                    if(student.getId()==getOption()) {
-                        System.out.print("Write grade:");
-                        student.addGrade(getOption());
-                        System.out.println(student.getName() + " has been changed");
-                        showMenu();
-                    }
-                }
-            }
-            case(7)->{
-                System.out.print("Write the Students number: ");
-                int number=getOption();
-                for (Student student : pm.studentList){
-                if(number==student.getId()) {
-                    System.out.print("Write what you want to change it to: ");
-                    String edu = getInput();
-                    student.setEducation(edu);
-                    System.out.println(student.getName() + " has been changed");
-                }
-                showMenu();
-                }
-            }
-            case (8) -> {
-                System.out.println("write the name or number of a person to delete then.");
-                System.out.println(pm.removePerson(getInput()));
-                showMenu();
-            }
-            case(0)->{clear();
-                System.out.printf("%n%s%n%-30s%-30s%n%-30s%-30s%n","Main menu","1: Students Menu", "2: Teachers Menu", "3: Print all Assets","0: Exit");}
+            case 0 -> showMainMenu();
+            case 1 -> createStudent();
+            case 2 -> getPersonsInfo();
+            case 3 -> printStudentsInfo();
+            case 4 -> editStudent();
+            case 5 -> setGrade();
+            case 6 -> addGrade();
+            case 7 -> delPerson();
             default -> System.out.println("Invalid input.");}
         }
+
+    private void createStudent() {
+        System.out.print("Write Student number: ");
+        int number = getOption();
+        for(Person person : pm.people)
+            if(person.getId()==number)
+                number=pm.uniqueNumber(100);
+        System.out.print("Write Student name: ");
+        String name = getInput();
+        System.out.print("Write Student email: ");
+        String email = getInput();
+        System.out.print("Write grade: ");
+        double grade = getGrade();
+        System.out.print("Write Main Subjects: ");
+        String main = getInput();
+        pm.addStudentsToList(number, name, email, main, grade);
+        System.out.println("The person has been added: " + number + " " + name + " " + email + " " + grade + " " + main);
+        pause();
+        showMenu();
     }
+
+    private void getPersonsInfo() {
+        System.out.println("Write persons name or number");
+        System.out.println(pm.getPersonsInfo(getInput()));
+        pause();
+        showMenu();
+    }
+
+    private void printStudentsInfo() {
+        pm.printStudentsInfo();
+        pause();
+        showMenu();
+    }
+    private void editStudent() {
+        System.out.print("Write the Students number: ");
+        for (Student student : pm.studentList){
+            int number=getOption();
+            if(number==student.getId()){
+                System.out.printf("%s%n%s%n%s%n%s%n", "Edit Menu","1: Name", "2: Email", "3: Education");
+                switch (getOption()){
+                    case (1) -> {
+                        System.out.print("Write the name you want to change it to: ");
+                        student.setName(getInput());
+                    }
+                    case(2) -> {
+                        System.out.print("Write the email you want to change it to: ");
+                        student.setEmail(getInput());
+                        System.out.println(student.getName() + " has been changed");
+                    }
+                    case 3 -> {System.out.print("Write what you want to change it to: ");
+                        String edu = getInput();
+                        student.setEducation(edu);
+                        System.out.println(student.getName() + " has been changed");
+                    }
+                    default -> System.out.println("Invalid input.");
+                }
+            }
+        }
+        showMenu();
+    }
+
+    private void addGrade() {
+        System.out.print("Write the students number: ");
+        for (Student student : pm.studentList){
+            if(student.getId()==getOption()) {
+                System.out.print("Write grade:");
+                student.addGrade(getGrade());
+                System.out.println(student.getName() + " has been changed");
+                showMenu();
+            }
+        }
+    }
+
+    private void setGrade() {
+        System.out.print("Write studentID: ");
+        for (Student student : pm.studentList) {
+            if (student.getId() == getOption()) {
+                System.out.print("Write grade: ");
+                student.setGradeAVG(getGrade());
+                System.out.println(student.getName() + "'s grade has been changed.");
+                showMenu();
+            }
+        }
+    }
+
+    private void delPerson() {
+        System.out.println("write the name or number of a person to delete then.");
+        System.out.println(pm.removePerson(getInput()));
+        showMenu();
+    }
+}

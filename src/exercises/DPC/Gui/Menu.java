@@ -88,7 +88,24 @@ public abstract class Menu
         }
         catch(InputMismatchException e){
             System.out.println("That's not a valid input.");
-            getOption();
+            Scanner asd = new Scanner(System.in);
+            output = asd.nextInt();
+        }
+        return output;
+    }
+
+    public Double getGrade()
+    {
+        Double output=-10.0;
+        try {
+            Scanner asd = new Scanner(System.in);
+            output = asd.nextDouble();
+            return output;
+        }
+        catch(InputMismatchException e){
+            System.out.println("That's not a valid input.");
+            Scanner asd = new Scanner(System.in);
+            output = asd.nextDouble();
         }
         return output;
     }
@@ -138,5 +155,10 @@ public abstract class Menu
     protected void clear()
     {
         System.out.printf("%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n");
+    }
+
+    public void showMainMenu() {
+        clear();
+        System.out.printf("%n%s%n%-30s%-30s%n%-30s%-30s%n","Main menu","1: Students Menu", "2: Teachers Menu", "3: Print all Assets","0: Exit");
     }
 }

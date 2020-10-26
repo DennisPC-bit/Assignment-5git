@@ -6,6 +6,7 @@ public class MainMenu extends Menu {
     StudentsMenu sm = new StudentsMenu("Students menu", "Create", "Read", "Print all Students", "Edit Student", "Edit GradeAVG", "Add grade", "Delete", "Go Back");
     public MainMenu() {
         super("Main menu", "Students Menu", "Teachers Menu", "Print all Assets");
+        pm.addInitialPeople();
     }
     /**
      * Does whatever you choose
@@ -14,12 +15,15 @@ public class MainMenu extends Menu {
     @Override
     protected void doAction(int option) {
         switch (option) {
-            case (1) -> sm.run();
-            case (2) -> tm.run();
-            case (3) -> {
+            case 1 -> sm.run();
+            case 2 -> tm.run();
+            case 3 -> {
                 pm.printPeoplesInfo();
                 pause();
                 showMenu();
+            }
+            case 0 -> {
+                System.out.println("Ending session.");
             }
             default -> {System.out.println("Invalid input.");
             showMenu();}
