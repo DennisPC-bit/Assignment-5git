@@ -1,8 +1,12 @@
 package exercises.DPC.Gui;
 
+import exercises.DPC.be.Person;
+import exercises.DPC.bll.PersonManager;
+
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import exercises.DPC.bll.PersonManager;
 
 /**
  * Abstract class implementing the basic functionality of a console based
@@ -30,7 +34,7 @@ public abstract class Menu {
     // The list of menu options texts.
     private String[] menuItems;
 
-    PeopleManager pm= new PeopleManager();
+    protected final PersonManager personManager;
 
     /**
      * Abstract method stating what should be done, when a
@@ -47,8 +51,9 @@ public abstract class Menu {
      * @param header    The header text of the menu.
      * @param menuItems The list of menu items texts.
      */
-    public Menu(String header, String... menuItems)
+    public Menu(PersonManager personManager,String header, String... menuItems)
     {
+        this.personManager=personManager;
         this.header = header;
         this.menuItems = menuItems;
     }

@@ -1,11 +1,11 @@
 package exercises.DPC.Gui;
 
+import exercises.DPC.bll.PersonManager;
+
 public class MainMenu extends Menu {
-    PeopleManager pm = new PeopleManager();
-    TeacherMenu tm = new TeacherMenu("Teacher menu", "TeacherMenu", "Create", "Read", "Print all Teachers", "Add subjects to teacher", "Edit teacher", "Delete");
-    StudentsMenu sm = new StudentsMenu("Students menu", "Create", "Read", "Print all Students", "Edit Student", "Edit GradeAVG", "Add grade", "Delete", "Go Back");
-    public MainMenu() {
-        super("Main menu", "Students Menu", "Teachers Menu", "Print all Assets");
+
+    public MainMenu(PersonManager personManager) {
+        super(personManager,"Main menu", "Students Menu", "Teachers Menu", "Print all Assets");
     }
     /**
      * Does whatever you choose
@@ -14,10 +14,10 @@ public class MainMenu extends Menu {
     @Override
     protected void doAction(int option) {
         switch (option) {
-            case 1 -> sm.run();
-            case 2 -> tm.run();
+            case 1 -> new StudentsMenu(personManager).run();
+            case 2 -> new TeacherMenu(personManager).run();
             case 3 -> {
-                pm.printPeoplesInfo();
+                personManager.printPeoplesInfo();
                 pause();
                 showMenu();
             }

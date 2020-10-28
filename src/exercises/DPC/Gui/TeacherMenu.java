@@ -2,18 +2,12 @@ package exercises.DPC.Gui;
 
 import exercises.DPC.be.Person;
 import exercises.DPC.be.Teacher;
+import exercises.DPC.bll.PersonManager;
 
 public class TeacherMenu extends Menu {
-    PeopleManager pm = new PeopleManager();
-    /**
-     * Creates an instance of the class with the given header text and
-     * menu options.
-     *
-     * @param header    The header text of the menu.
-     * @param menuItems The list of menu items texts.
-     */
-    public TeacherMenu(String header, String... menuItems) {
-        super("Teacher menu", "Create teacher", "Read teacher by ID", "Print all Teachers", "Add subjects to teacher", "Edit teacher", "Delete");
+
+    public TeacherMenu(PersonManager personManager) {
+        super(personManager,"Teacher menu", "Create teacher", "Read teacher by ID", "Print all Teachers", "Add subjects to teacher", "Edit teacher", "Delete");
     }
 
     /**
@@ -25,11 +19,11 @@ public class TeacherMenu extends Menu {
 
         switch (option) {
             case 1 -> addTeacher();
-            case 2 -> printTeacher("Write persons name or number", pm.getPersonsInfo(getInput()));
+            case 2 -> printTeacher("Write persons name or number", personManager.getPersonsInfo(getInput()));
             case 3 -> printTeachers();
             case 4 -> addSubjectToTeacher();
             case 5 -> editTeacher();
-            case 6 -> removePerson("Write the name or number of a person to delete then.", pm.removePerson(getInput()));
+            case 6 -> removePerson("Write the name or number of a person to delete then.", personManager.removePerson(getInput()));
             case 0 -> showMainMenu();
             default -> System.out.println("Invalid input.");
             }
@@ -38,9 +32,9 @@ public class TeacherMenu extends Menu {
     private void addTeacher() {
         System.out.print("Write Teacher number: ");
         int number = getOption();
-        for(Person person : pm.people)
+        for(Person person : PersonManager.people)
             if(person.getId()==number)
-                number=pm.uniqueNumber(500);
+                number=personManager.uniqueNumber(500);
         System.out.print("Write Teacher name: ");
         String name = getInput();
         System.out.print( "Write Teacher email: ");
@@ -49,7 +43,7 @@ public class TeacherMenu extends Menu {
         String initials = getInput();
         System.out.print( "Write Subjects: ");
         String main = getInput();
-        pm.addTeacherToList(number, name, email, main, initials);
+        personManager.addTeacherToList(number, name, email, main, initials);
         System.out.println("The person has been added: " + number + " " + name + " " + email + " " + main + " " + initials);
         pause();
         showMenu();
@@ -62,14 +56,14 @@ public class TeacherMenu extends Menu {
     }
 
     private void printTeachers() {
-        pm.printTeachersInfo();
+        personManager.printTeachersInfo();
         pause();
         showMenu();
     }
 
     private void addSubjectToTeacher() {
         System.out.print("Write the teacher's number: ");
-        for (Teacher teacher : pm.teachersList) {
+        for (Teacher teacher : PersonManager.teachersList) {
             if (teacher.getId() == getOption()) {
                 System.out.print("Write subject you want to add: ");
                 teacher.addSubjects(getInput());
@@ -81,7 +75,7 @@ public class TeacherMenu extends Menu {
 
     private void editTeacher() {
         System.out.print("Write the number of the teacher you want to edit: ");
-        for (Teacher teacher : pm.teachersList){
+        for (Teacher teacher : PersonManager.teachersList){
             if(teacher.getId()==getOption()){
                 System.out.print("write name or email to change it");
                 switch (getInput().toLowerCase()){

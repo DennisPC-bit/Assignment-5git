@@ -2,18 +2,15 @@ package exercises.DPC.Gui;
 
 import exercises.DPC.be.Person;
 import exercises.DPC.be.Student;
+import exercises.DPC.bll.PersonManager;
 
 public class StudentsMenu extends Menu {
-PeopleManager pm = new PeopleManager();
     /**
      * Creates an instance of the class with the given header text and
      * menu options.
-     *
-     * @param header    The header text of the menu.
-     * @param menuItems The list of menu items texts.
      */
-    public StudentsMenu(String header, String... menuItems) {
-        super("Students menu", "Create Student", "Read student by ID", "Print all Students", "Edit Student", "Edit GradeAVG", "Add grade", "Edit Education", "Delete");
+    public StudentsMenu(PersonManager personManager) {
+        super(personManager,"Students menu", "Create Student", "Read student by ID", "Print all Students", "Edit Student", "Edit GradeAVG", "Add grade", "Edit Education", "Delete");
     }
 
     /**
@@ -24,12 +21,12 @@ PeopleManager pm = new PeopleManager();
     protected void doAction(int option) {
         switch (option) {
             case 1 -> addStudent();
-            case 2 -> getPersonsInfo("Write persons name or number", pm.getPersonsInfo(getInput()));
+            case 2 -> getPersonsInfo("Write persons name or number", personManager.getPersonsInfo(getInput()));
             case 3 -> printAllStudentsInfo();
             case 4 -> editStudent();
             case 5 -> setGradeAVG();
             case 6 -> addGrade();
-            case 7 -> removePerson("write the name or number of a person to delete then.", pm.removePerson(getInput()));
+            case 7 -> removePerson("write the name or number of a person to delete then.",personManager.removePerson(getInput()));
             case 0 -> showMainMenu();
             default -> System.out.println("Invalid input.");}
         }
@@ -37,9 +34,9 @@ PeopleManager pm = new PeopleManager();
     private void addStudent() {
         System.out.print("Write Student number: ");
         int number = getOption();
-        for(Person person : pm.people)
+        for(Person person : PersonManager.people)
             if(person.getId()==number)
-                number=pm.uniqueNumber(100);
+                number=personManager.uniqueNumber(100);
         System.out.print("Write Student name: ");
         String name = getInput();
         System.out.print("Write Student email: ");
@@ -48,7 +45,7 @@ PeopleManager pm = new PeopleManager();
         double grade = getOption();
         System.out.print("Write Main Subjects: ");
         String main = getInput();
-        pm.addStudentsToList(number, name, email, main, grade);
+        personManager.addStudentsToList(number, name, email, main, grade);
         System.out.println("The person has been added: " + number + " " + name + " " + email + " " + grade + " " + main);
         pause();
         showMenu();
@@ -61,14 +58,14 @@ PeopleManager pm = new PeopleManager();
     }
 
     private void printAllStudentsInfo() {
-        pm.printStudentsInfo();
+        personManager.printStudentsInfo();
         pause();
         showMenu();
     }
 
     private void editStudent() {
         System.out.print("Write the Students number: ");
-        for (Student student : pm.studentList){
+        for (Student student : PersonManager.studentList){
             int number=getOption();
             if(number==student.getId()){
                 System.out.printf("%n%-30s%-30s%n%-30s%n","1: Change student name", "2: Change Student Email","3: Change Students Subjects");
@@ -105,7 +102,7 @@ PeopleManager pm = new PeopleManager();
 
     private void setGradeAVG() {
         System.out.print("Write studentID: ");
-        for (Student student : pm.studentList) {
+        for (Student student : PersonManager.studentList) {
             if (student.getId() == getOption()) {
                 System.out.print("Write grade: ");
                 student.setGradeAVG(getOption());
@@ -117,7 +114,7 @@ PeopleManager pm = new PeopleManager();
 
     private void addGrade() {
         System.out.print("Write the students number: ");
-        for (Student student : pm.studentList){
+        for (Student student : PersonManager.studentList){
             if(student.getId()==getOption()) {
                 System.out.print("Write grade:");
                 student.addGrade(getOption());

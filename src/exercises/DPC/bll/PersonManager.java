@@ -1,4 +1,4 @@
-package exercises.DPC.Gui;
+package exercises.DPC.bll;
 
 import exercises.DPC.be.Person;
 import exercises.DPC.be.Student;
@@ -7,21 +7,21 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class PeopleManager {
+public class PersonManager {
     static int i=1;
     /**
      * Adds some data to the lists
      */
-    public PeopleManager(){
+    public PersonManager(){
 
         if(i==1)
         addInitialPeople();
         i++;
     }
 
-static List<Person> people = new ArrayList<>();
-static List<Teacher> teachersList = new ArrayList<>();
-static List<Student> studentList = new ArrayList<>();
+public static List<Person> people = new ArrayList<>();
+public static List<Teacher> teachersList = new ArrayList<>();
+public static List<Student> studentList = new ArrayList<>();
 
 public void addInitialPeople() {
     addStudentsToList(69, "Dennis PC", "Dnisp@live.dk", "Java", 12.0);
