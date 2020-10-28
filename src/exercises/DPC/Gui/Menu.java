@@ -1,8 +1,6 @@
 package exercises.DPC.Gui;
 
-import java.io.Console;
 import java.io.IOException;
-import java.io.StreamCorruptedException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -21,8 +19,7 @@ import java.util.Scanner;
  *
  * @author bhp
  */
-public abstract class Menu
-{
+public abstract class Menu {
     // value used to exit the menu.
     // the value can be changed by the sub-class constructor.
     protected int EXIT_OPTION = 0;
@@ -32,6 +29,8 @@ public abstract class Menu
 
     // The list of menu options texts.
     private String[] menuItems;
+
+    PeopleManager pm= new PeopleManager();
 
     /**
      * Abstract method stating what should be done, when a
@@ -139,4 +138,7 @@ public abstract class Menu
     {
         System.out.printf("%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n%n");
     }
+
+    public void showMainMenu(){ clear();
+        System.out.printf("%n%s%n%-30s%-30s%n%-30s%-30s%n","Main menu","1: Students Menu", "2: Teachers Menu", "3: Print all Assets","0: Exit");}
 }

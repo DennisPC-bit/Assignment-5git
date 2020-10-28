@@ -1,4 +1,4 @@
-package exercises.DPC.Data;
+package exercises.DPC.be;
 
 import java.util.ArrayList;
 import java.util.List;

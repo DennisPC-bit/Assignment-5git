@@ -1,9 +1,8 @@
 package exercises.DPC.Gui;
 
-import exercises.DPC.Data.Person;
-import exercises.DPC.Data.Student;
-import exercises.DPC.Data.Teacher;
-
+import exercises.DPC.be.Person;
+import exercises.DPC.be.Student;
+import exercises.DPC.be.Teacher;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -24,19 +23,21 @@ static List<Person> people = new ArrayList<>();
 static List<Teacher> teachersList = new ArrayList<>();
 static List<Student> studentList = new ArrayList<>();
 
-public void addInitialPeople(){
-    addPersonToList(100,"Hans Nielsen"," hni@easv.dk");
+public void addInitialPeople() {
+    addStudentsToList(69, "Dennis PC", "Dnisp@live.dk", "Java", 12.0);
 
-    addPersonToList(101,"Niels Hansen", "nha@easv.dk");
+    addPersonToList(100, "Hans Nielsen", " hni@easv.dk");
 
-    addPersonToList(102,"Ib Boesen","ibo@easv.dk");
+    addPersonToList(101, "Niels Hansen", "nha@easv.dk");
 
-    addTeacherToList(502,"Bent H. Pedersen","bhp@easv.dk","bhp","Programming");
+    addPersonToList(102, "Ib Boesen", "ibo@easv.dk");
 
-    addStudentsToList(105,"Bo Ibsen", "bib@easv.dk","CS",8.5);
+    addTeacherToList(502, "Bent H. Pedersen", "bhp@easv.dk", "bhp", "Programming");
+
+    addStudentsToList(105, "Bo Ibsen", "bib@easv.dk", "CS", 8.5);
 }
 
-public void addPersonToList(int id, String name, String email){
+    public void addPersonToList(int id, String name, String email){
     for (Person person: people){
         if(person.getId()==id) {
             person.setName(name);
@@ -168,9 +169,9 @@ public void addPersonToList(int id, String name, String email){
     public void printStudentsInfo(){
         System.out.println("Students:");
     studentList.sort(Comparator.comparingInt(Person::getId));
-        System.out.printf("%4s%20s%20s%10s%15s", "####", "Name", "Email", "Education", "GradeAVG");
+        System.out.printf("%4s%20s%20s%10s%15s", "####", "Name", "Email", "GradeAVG","Education");
         for(Student student: studentList)
-            System.out.printf("%n%4d%20s%20s%10s%15s", student.getId(), student.getName(), student.getEmail(), student.getEducation(), student.getGradeAVG());
+            System.out.printf("%n%4d%20s%20s%10s%15s", student.getId(), student.getName(), student.getEmail(), student.getGradeAVG(),student.getEducation());
         System.out.printf("%n");
     }
 }

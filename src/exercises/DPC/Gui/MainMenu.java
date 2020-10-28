@@ -14,13 +14,14 @@ public class MainMenu extends Menu {
     @Override
     protected void doAction(int option) {
         switch (option) {
-            case (1) -> sm.run();
-            case (2) -> tm.run();
-            case (3) -> {
+            case 1 -> sm.run();
+            case 2 -> tm.run();
+            case 3 -> {
                 pm.printPeoplesInfo();
                 pause();
                 showMenu();
             }
+            case 0 -> System.out.println("Session ended. Goodbye :)");
             default -> {System.out.println("Invalid input.");
             showMenu();}
         }

@@ -1,4 +1,4 @@
-package exercises.DPC.Data;
+package exercises.DPC.be;
 
 public class Person {
     private final int id;
