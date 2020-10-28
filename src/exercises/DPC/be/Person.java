@@ -1,4 +1,4 @@
-package exercises.DPC.Data;
+package exercises.DPC.be;
 
 public class Person {
     private final int id;
@@ -18,10 +18,8 @@ public class Person {
     public int getId() {return this.id;}
     public String getName() {return this.name;}
     public String getEmail() {return this.email;}
-
     public void setName(String name) {this.name=name;}
     public void setEmail(String email) {this.email=email;}
-
     public String toString(Person person){
         return person.getId() + " " + person.getName() + " " + person.getEmail();
     }
