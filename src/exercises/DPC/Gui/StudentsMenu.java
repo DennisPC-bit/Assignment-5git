@@ -68,7 +68,7 @@ public class StudentsMenu extends Menu {
 
     private void editStudent() {
         System.out.print("Write the Students number: ");
-        for (Student student : PersonManager.studentList){
+        for (Student student : personManager.studentList){
             int number=getOption();
             if(number==student.getId()){
                 System.out.printf("%n%-30s%-30s%n%-30s%n","1: Change student name", "2: Change Student Email","3: Change Students Subjects");
@@ -105,7 +105,7 @@ public class StudentsMenu extends Menu {
 
     private void setGradeAVG() {
         System.out.print("Write studentID: ");
-        for (Student student : PersonManager.studentList) {
+        for (Student student : personManager.studentList) {
             if (student.getId() == getOption()) {
                 System.out.print("Write grade: ");
                 student.setGradeAVG(getOption());
@@ -117,7 +117,7 @@ public class StudentsMenu extends Menu {
 
     private void addGrade() {
         System.out.print("Write the students number: ");
-        for (Student student : PersonManager.studentList){
+        for (Student student : personManager.studentList){
             if(student.getId()==getOption()) {
                 System.out.print("Write grade:");
                 student.addGrade(getOption());

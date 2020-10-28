@@ -31,7 +31,7 @@ public class TeacherMenu extends Menu {
     private void addTeacher() {
         System.out.print("Write Teacher number: ");
         int number = getOption();
-        for(Person person : PersonManager.people)
+        for(Person person : personManager.people)
             if(person.getId()==number)
                 number=personManager.uniqueNumber(500);
         System.out.print("Write Teacher name: ");
@@ -62,7 +62,7 @@ public class TeacherMenu extends Menu {
 
     private void addSubjectToTeacher() {
         System.out.print("Write the teacher's number: ");
-        for (Teacher teacher : PersonManager.teachersList) {
+        for (Teacher teacher : personManager.teachersList) {
             if (teacher.getId() == getOption()) {
                 System.out.print("Write subject you want to add: ");
                 teacher.addSubjects(getInput());
@@ -74,7 +74,7 @@ public class TeacherMenu extends Menu {
 
     private void editTeacher() {
         System.out.print("Write the number of the teacher you want to edit: ");
-        for (Teacher teacher : PersonManager.teachersList){
+        for (Teacher teacher : personManager.teachersList){
             if(teacher.getId()==getOption()){
                 System.out.print("write name or email to change it");
                 switch (getInput().toLowerCase()){

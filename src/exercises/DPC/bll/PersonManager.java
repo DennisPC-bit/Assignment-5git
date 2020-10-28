@@ -12,7 +12,9 @@ public class PersonManager {
     /**
      * Adds some data to the lists
      */
-    public PeopleManager(){}
+    public PersonManager(){
+        addInitialPeople();
+    }
 
 public static List<Person> people = new ArrayList<>();
 public static List<Teacher> teachersList = new ArrayList<>();
