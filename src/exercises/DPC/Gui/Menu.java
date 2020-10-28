@@ -1,12 +1,9 @@
 package exercises.DPC.Gui;
 
-import exercises.DPC.be.Person;
 import exercises.DPC.bll.PersonManager;
-
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import exercises.DPC.bll.PersonManager;
 
 /**
  * Abstract class implementing the basic functionality of a console based
